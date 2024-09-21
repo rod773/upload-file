@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [file, setFile] = useState("");
-
   const handleChange = (e) => {
-    setFile(e.target.files[0]);
+    sendFile(e.target.files[0]);
   };
 
-  const sendFile = async () => {
+  const sendFile = async (file) => {
     console.log(file);
 
-    const url = "http://localhost/wordpress/tienda/fileupload/";
+    const api = "http://localhost/wordpress/tienda/fileupload/";
     const body = new FormData();
     body.append("file", file);
 
@@ -20,11 +18,13 @@ function App() {
     //   .then((response) => console.log(response))
     //   .catch((error) => console.log(error));
 
-    const res = await axios.post(url, body);
+    const res = await axios.post(api, body);
 
     const { data } = await res;
 
-    console.dir(data);
+    const { url } = await data;
+
+    console.log(url);
   };
 
   return (
@@ -49,7 +49,7 @@ function App() {
           />
         </div>
         <div className="form-group">
-          <button onClick={sendFile} className="btn btn-primary" type="submit">
+          <button className="btn btn-primary" type="submit">
             ENVIAR
           </button>
         </div>
