@@ -48,11 +48,11 @@ function App() {
             id="file"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <button className="btn btn-primary" type="submit">
             ENVIAR
           </button>
-        </div>
+        </div> */}
         {/* </form> */}
       </div>
     </>
