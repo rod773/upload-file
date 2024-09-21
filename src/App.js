@@ -8,17 +8,23 @@ function App() {
     setFile(e.target.files[0]);
   };
 
-  const sendFile = () => {
+  const sendFile = async () => {
     console.log(file);
 
     const url = "http://localhost/wordpress/tienda/fileupload/";
     const body = new FormData();
     body.append("file", file);
 
-    axios
-      .post(url, body)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    // axios
+    //   .post(url, body)
+    //   .then((response) => console.log(response))
+    //   .catch((error) => console.log(error));
+
+    const res = await axios.post(url, body);
+
+    const { data } = await res;
+
+    console.dir(data);
   };
 
   return (
