@@ -10,6 +10,9 @@ function App() {
     console.log(file);
 
     const api = "http://localhost/wordpress/tienda/fileupload/";
+
+    //const api = "https://infodemencias.com/tienda/api-tienda/fileupload/";
+
     const body = new FormData();
     body.append("file", file);
 
