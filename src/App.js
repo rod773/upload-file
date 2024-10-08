@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import axios from "axios";
 
 function App() {
+  const uploadImgRef = useRef();
+
   const handleChange = (e) => {
     sendFile(e.target.files[0]);
   };
@@ -9,9 +11,13 @@ function App() {
   const sendFile = async (file) => {
     console.log(file);
 
-    const api = "http://localhost/wordpress/tienda/fileupload/";
+    //const api = "http://localhost/wordpress/tienda/fileupload/";
 
-    //const api = "https://infodemencias.com/tienda/api-tienda/fileupload/";
+    const api = "https://infodemencias.com/tienda/api-tienda/fileupload/";
+
+    uploadImgRef.current.style.display = "block";
+
+    uploadImgRef.current.src = URL.createObjectURL(file);
 
     const body = new FormData();
     body.append("file", file);
@@ -23,11 +29,13 @@ function App() {
 
     const res = await axios.post(api, body);
 
+    console.dir(res);
+
     const { data } = await res;
 
     const { url } = await data;
 
-    console.log(url);
+    if (url) window.location.href = url;
   };
 
   return (
@@ -51,6 +59,15 @@ function App() {
             id="file"
           />
         </div>
+        <img
+          ref={uploadImgRef}
+          width="200"
+          src="#"
+          alt="upload img"
+          style={{
+            display: "none",
+          }}
+        />
         {/* <div className="form-group">
           <button className="btn btn-primary" type="submit">
             ENVIAR
