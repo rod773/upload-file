@@ -57,6 +57,7 @@ function App() {
             name="file"
             className="form-control"
             id="file"
+            accept="image/*"
           />
         </div>
         <img
